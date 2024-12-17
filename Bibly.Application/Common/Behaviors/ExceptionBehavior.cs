@@ -7,8 +7,7 @@ public class ExceptionBehavior<TRequest,TResponse>
     : IPipelineBehavior<TRequest, TResponse> where TRequest: IRequest<TResponse> 
 {
     public ExceptionBehavior()
-    {
-        
+    {        
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

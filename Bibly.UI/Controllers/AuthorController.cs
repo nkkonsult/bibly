@@ -1,4 +1,5 @@
 ﻿using Bibly.Application.Author;
+using Bibly.Application.Common.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,17 @@ public class AuthorController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> AddAuthor(AddAuthorCommand command)
-        => Ok(await _sender.Send(command));
+    {
+        try
+        {
+            return Ok(await _sender.Send(command));
+        }
+        catch (ValidationException ex )
+        {
+
+            return BadRequest(ex.Errors);
+        }
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetAllAuthors([FromQuery] GetAllAuthorsQuery query)
