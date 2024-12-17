@@ -1,5 +1,4 @@
-﻿
-using Bibly.Infra.Persistence;
+﻿using AutoMapper.QueryableExtensions;
 
 namespace Bibly.Infra.Repositories;
 
@@ -26,5 +25,20 @@ public class SqlLiteAuthorRepository : IAuthorRepository
     public Task<bool> Equals(string firstName, string lastName, DateTime birthDay)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<AuthorDto>> GetAllAuthor()
+    {
+        return await _context.Authors
+            .ProjectTo<AuthorDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<AuthorDto>> SearchAuthorQuery(string search)
+    {
+        return await _context.Authors
+            .Where(x => EF.Functions.Like(x.FirstName.ToLower(), $"%{search.ToLower()}%") || EF.Functions.Like(x.LastName.ToLower(), $"%{search.ToLower()}%"))
+            .ProjectTo<AuthorDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
     }
 }

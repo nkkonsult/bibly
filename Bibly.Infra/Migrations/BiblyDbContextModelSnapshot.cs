@@ -23,7 +23,7 @@ namespace Bibly.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime>("BirthDay")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedDate")

@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Bibly.Infra;
 
@@ -13,7 +13,7 @@ public static class DependencyInjection
         services.AddAutoMapper(ass);
 
         services.AddDbContext<BiblyDbContext>(opt =>
-        opt.UseSqlite(configuration.GetConnectionString("Sqlite")));
+        opt.UseSqlite(configuration.GetSection("Sqlite").Value));
 
         services.AddScoped<IAuthorRepository, SqlLiteAuthorRepository>();
 
