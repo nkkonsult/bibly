@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bibly", "bibly\bibly.csproj", "{743F6E2E-DE59-4596-A81A-FF1AF9E2D5B6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AC2E75F-340A-4FEA-A18C-6E962FEDFC92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5A9A5FF7-B99C-41A4-AFEA-7B4A67F2FA37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibly.UI", "Bibly.UI\Bibly.UI.csproj", "{7063CA6B-72FD-4203-809A-F0A453D81B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibly.Core", "Bibly.Core\Bibly.Core.csproj", "{CDA32608-530D-4A60-A7DA-8199A091CB5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibly.Application", "Bibly.Application\Bibly.Application.csproj", "{64768393-0905-4E22-B57A-154A91AE6C52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibly.Infrastructure", "Bibly.Infrastructure\Bibly.Infrastructure.csproj", "{5D353AEF-320C-4FCD-95F9-F549FB52F114}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +21,33 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{743F6E2E-DE59-4596-A81A-FF1AF9E2D5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{743F6E2E-DE59-4596-A81A-FF1AF9E2D5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{743F6E2E-DE59-4596-A81A-FF1AF9E2D5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{743F6E2E-DE59-4596-A81A-FF1AF9E2D5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7063CA6B-72FD-4203-809A-F0A453D81B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7063CA6B-72FD-4203-809A-F0A453D81B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7063CA6B-72FD-4203-809A-F0A453D81B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7063CA6B-72FD-4203-809A-F0A453D81B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDA32608-530D-4A60-A7DA-8199A091CB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA32608-530D-4A60-A7DA-8199A091CB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDA32608-530D-4A60-A7DA-8199A091CB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA32608-530D-4A60-A7DA-8199A091CB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64768393-0905-4E22-B57A-154A91AE6C52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64768393-0905-4E22-B57A-154A91AE6C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64768393-0905-4E22-B57A-154A91AE6C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64768393-0905-4E22-B57A-154A91AE6C52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D353AEF-320C-4FCD-95F9-F549FB52F114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D353AEF-320C-4FCD-95F9-F549FB52F114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D353AEF-320C-4FCD-95F9-F549FB52F114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D353AEF-320C-4FCD-95F9-F549FB52F114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7063CA6B-72FD-4203-809A-F0A453D81B30} = {7AC2E75F-340A-4FEA-A18C-6E962FEDFC92}
+		{CDA32608-530D-4A60-A7DA-8199A091CB5C} = {7AC2E75F-340A-4FEA-A18C-6E962FEDFC92}
+		{64768393-0905-4E22-B57A-154A91AE6C52} = {7AC2E75F-340A-4FEA-A18C-6E962FEDFC92}
+		{5D353AEF-320C-4FCD-95F9-F549FB52F114} = {7AC2E75F-340A-4FEA-A18C-6E962FEDFC92}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75B032EE-7B39-4545-9B3D-F586E08E76C9}
 	EndGlobalSection
 EndGlobal
