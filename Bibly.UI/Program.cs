@@ -29,3 +29,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// dotnet ef migrations add InitialCreate --project .\Bibly.Infra\ --startup-project .\Bibly.UI\

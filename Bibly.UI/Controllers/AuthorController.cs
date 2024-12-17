@@ -18,4 +18,8 @@ public class AuthorController : ControllerBase
     public async Task<IActionResult> AddAuthor(AddAuthorCommand command)
         => Ok(await _sender.Send(command));
 
+    [HttpGet]
+    public async Task<IActionResult> GetAllAuthors([FromQuery] GetAllAuthorsQuery query)
+        => Ok(await _sender.Send(query));
+
 }

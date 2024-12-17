@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bibly.Infra.Migrations
 {
     [DbContext(typeof(BiblyDbContext))]
-    [Migration("20241216152230_InitialCreate")]
+    [Migration("20241217092823_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace Bibly.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime>("BirthDay")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedDate")

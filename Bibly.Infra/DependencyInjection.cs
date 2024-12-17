@@ -11,9 +11,8 @@ public static class DependencyInjection
         var ass = Assembly.GetExecutingAssembly();
 
         services.AddAutoMapper(ass);
-
         services.AddDbContext<BiblyDbContext>(opt =>
-        opt.UseSqlite(configuration.GetConnectionString("Sqlite")));
+        opt.UseSqlite(configuration.GetSection("Sqlite").Value));
 
         services.AddScoped<IAuthorRepository, SqlLiteAuthorRepository>();
 

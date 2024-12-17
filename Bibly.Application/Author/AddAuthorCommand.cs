@@ -6,14 +6,9 @@ public record AddAuthorCommand(string FirstName, string LastName, DateTime Birth
 
 public class AddAuthorCommandHandler(IAuthorRepository authorRepository) : IRequestHandler<AddAuthorCommand, int>
 {  
+    private AddAuthorCommandValidator validator;
     public async Task<int> Handle(AddAuthorCommand request, CancellationToken cancellationToken)
-    {
-        //Todo ajouter controle si l'auteur existe deja
-
-        if(await authorRepository.Equals(request.FirstName, request.LastName, request.BirthDay))
-        {
-            throw new Exception("Author already exists");
-        }
+    {      
 
         return await authorRepository.Add(new AuthorDto(0,request.FirstName, request.LastName, request.BirthDay));
     }
@@ -23,14 +18,23 @@ public class AddAuthorCommandValidator : AbstractValidator<AddAuthorCommand>
 {
     public AddAuthorCommandValidator()
     {
+
+        var textNotEmpty = "Le {PropertyName} ne doit pas être vide.";
+
         RuleFor(x => x.FirstName)
-            .NotEmpty()
-            .MinimumLength(2);
+            .NotEmpty().WithMessage(textNotEmpty)
+            .MinimumLength(2).WithMessage("Le prénom doit contenir au moins 2 caractères.")
+            .Must(NotContainDigit).WithMessage("Le prénom ne doit pas contenir de chiffres.");
         RuleFor(x => x.LastName)
-            .NotEmpty()
-            .MinimumLength(2);
+            .NotEmpty().WithMessage(textNotEmpty)
+            .MinimumLength(2).WithMessage("Le nom de famille doit contenir au moins 2 caractères.");
         RuleFor(x => x.BirthDay)
-            .NotEmpty();
+            .NotEmpty().WithMessage("La date de naissance ne doit pas être vide.");
+    }
+
+    private bool NotContainDigit(string arg)
+    {
+        return !arg.Any(char.IsDigit);
     }
 }
 

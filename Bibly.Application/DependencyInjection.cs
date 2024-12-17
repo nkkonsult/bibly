@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Bibly.Application.Common.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bibly.Application;
@@ -12,7 +13,7 @@ public static class DependencyInjection
         services.AddMediatR(c =>
         {
             c.RegisterServicesFromAssemblies(ass);
-            
+            c.AddBehavior(typeof(IPipelineBehavior<,>),typeof(ExceptionBehavior<,>));            
         });
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

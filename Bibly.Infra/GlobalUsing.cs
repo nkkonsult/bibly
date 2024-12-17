@@ -6,3 +6,4 @@ global using Bibly.Application.Repositories;
 global using Bibly.Core.Dtos;
 global using AutoMapper;
 global using Bibly.Infra.Persistence;
+global using AutoMapper.QueryableExtensions;
