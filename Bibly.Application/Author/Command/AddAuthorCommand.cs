@@ -17,13 +17,16 @@ public class AddAuthorCommandValidator : AbstractValidator<AddAuthorCommand>
     public AddAuthorCommandValidator()
     {
         RuleFor(x => x.FirstName)
-            .NotEmpty()
-            .MinimumLength(2);
+        .NotEmpty()
+        .MinimumLength(2)
+        .Must(NotContainDigit);
         RuleFor(x => x.LastName)
-            .NotEmpty()
-            .MinimumLength(2);
+        .NotEmpty()
+        .MinimumLength(2);
         RuleFor(x => x.BirthDay)
-            .NotEmpty();
+        .NotEmpty();
     }
-}
 
+    private bool NotContainDigit(string arg)
+        => !arg.Any(char.IsDigit);
+}
