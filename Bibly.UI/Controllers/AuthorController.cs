@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bibly.UI.Controllers;
 
 [Route("api/[controller]")]
-public class AuthorController : ControllerBase
+public class AuthorController(ISender sender) : ControllerBase
 {
-    private readonly ISender _sender;
-
-    public AuthorController(ISender sender)
-    {
-        _sender = sender;
-    }
-
     [HttpPost]
     public async Task<IActionResult> AddAuthor(AddAuthorCommand command)
-        => Ok(await _sender.Send(command));
+        => Ok(await sender.Send(command));
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAuthor(GetAllAuthorQuery query)
+       => Ok(await sender.Send(query));
+
+    [HttpGet("Search")]
+    public async Task<IActionResult> SearchAuthorByLastName(GetSearchAuthorQuery query)
+       => Ok(await sender.Send(query));
 
 }

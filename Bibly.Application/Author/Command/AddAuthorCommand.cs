@@ -8,13 +8,6 @@ public class AddAuthorCommandHandler(IAuthorRepository authorRepository) : IRequ
 {  
     public async Task<int> Handle(AddAuthorCommand request, CancellationToken cancellationToken)
     {
-        //Todo ajouter controle si l'auteur existe deja
-
-        if(await authorRepository.Equals(request.FirstName, request.LastName, request.BirthDay))
-        {
-            throw new Exception("Author already exists");
-        }
-
         return await authorRepository.Add(new AuthorDto(0,request.FirstName, request.LastName, request.BirthDay));
     }
 }

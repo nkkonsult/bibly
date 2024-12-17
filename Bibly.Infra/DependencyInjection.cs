@@ -13,7 +13,7 @@ public static class DependencyInjection
         services.AddAutoMapper(ass);
 
         services.AddDbContext<BiblyDbContext>(opt =>
-        opt.UseSqlite(configuration.GetConnectionString("Sqlite")));
+        opt.UseSqlite(configuration["Sqlite"]));
 
         services.AddScoped<IAuthorRepository, SqlLiteAuthorRepository>();
 

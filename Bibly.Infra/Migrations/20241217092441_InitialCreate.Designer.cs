@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bibly.Infra.Migrations
 {
     [DbContext(typeof(BiblyDbContext))]
-    [Migration("20241216152230_InitialCreate")]
+    [Migration("20241217092441_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

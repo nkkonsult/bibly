@@ -1,30 +1,30 @@
-﻿
-using Bibly.Infra.Persistence;
+﻿using AutoMapper.QueryableExtensions;
 
 namespace Bibly.Infra.Repositories;
 
-public class SqlLiteAuthorRepository : IAuthorRepository
+public class SqlLiteAuthorRepository(BiblyDbContext context, IMapper mapper) : IAuthorRepository
 {
-    private readonly BiblyDbContext _context;
-    private readonly IMapper _mapper;
-
-    public SqlLiteAuthorRepository(BiblyDbContext context, IMapper mapper)
-    {
-        _context = context;
-        _mapper = mapper;
-    }
-
     public async Task<int> Add(AuthorDto author)
     {
-        var entity = _mapper.Map<Author>(author);
+        var entity = mapper.Map<Author>(author);
 
-        _context.Authors.Add(entity);
+        await context.Authors.AddAsync(entity);
 
-        return await _context.SaveChangesAsync();
+        return await context.SaveChangesAsync();
     }
 
-    public Task<bool> Equals(string firstName, string lastName, DateTime birthDay)
+    public Task<List<AuthorDto>> GetAll()
     {
-        throw new NotImplementedException();
+        var entities = context.Authors.ProjectTo<AuthorDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return entities;
+    }
+
+    public Task<List<AuthorDto>> SearchAll(string lastName)
+    {
+        return context.Authors.Where(a => a.LastName.Contains(lastName))
+            .ProjectTo<AuthorDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
     }
 }

@@ -1,11 +1,10 @@
-﻿
+﻿namespace Bibly.Application.Repositories;
 
-
-namespace Bibly.Application.Repositories
+public interface IAuthorRepository
 {
-    public interface IAuthorRepository
-    {
-        Task<int> Add(AuthorDto author);
-        Task<bool> Equals(string firstName, string lastName, DateTime birthDay);
-    }
+    Task<int> Add(AuthorDto author);
+
+    Task<List<AuthorDto>> GetAll();
+
+    Task<List<AuthorDto>> SearchAll(string lastName);
 }
