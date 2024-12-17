@@ -22,7 +22,7 @@ public class SqlLiteAuthorRepository : IAuthorRepository
         return await _context.SaveChangesAsync();
     }
 
-    public Task<bool> Equals(string firstName, string lastName, DateTime birthDay)
+    public Task<bool> Exist(string firstName, string lastName, DateTime birthDay)
     {
         throw new NotImplementedException();
     }

@@ -13,7 +13,7 @@ internal class FakeAuthorRepository : IAuthorRepository
         return Authors.Count;
     }
 
-    public async Task<bool> Equals(string firstName, string lastName, DateTime birthDay)
+    public async Task<bool> Exist(string firstName, string lastName, DateTime birthDay)
     {
         await Task.Yield();
         return Authors.Values.Any(a => a.FirstName == firstName && a.LastName == lastName && a.BirthDay == birthDay);

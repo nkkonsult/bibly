@@ -9,10 +9,11 @@ public class AddAuthorCommandHandler(IAuthorRepository authorRepository) : IRequ
     {
         //Todo ajouter controle si l'auteur existe deja
 
-        //if(await authorRepository.Equals(request.FirstName, request.LastName, request.BirthDay))
-        //{
-        //    throw new Exception("Author already exists");
-        //}
+        if (await authorRepository.Exist(request.FirstName, request.LastName, request.BirthDay))
+        {
+            throw new Application.Common.Exceptions.ValidationException("Author already exists");
+        }
+
 
         return await authorRepository.Add(new AuthorDto(0, request.FirstName, request.LastName, request.BirthDay));
     }

@@ -1,21 +1,21 @@
 using Bibly.Application.Author.Command;
+using Bibly.Application.Common.Exceptions;
 using Bibly.ValidationTest.Drivers;
 
 namespace Bibly.ValidationTest.StepDefinitions
 {
     [Binding]
-    public class GestionDesAuteursStepDefinitions
+    public class GestionDesAuteursStepDefinitions : Testing
     {
         private AddAuthorCommand command;
         private string LastName;
         private string FirstName;
         private DateTime BirthDay;
 
-        private AddAuthorCommandHandler handler;
+        private Exception exception;
 
         public GestionDesAuteursStepDefinitions()
         {
-            handler = new AddAuthorCommandHandler(new FakeAuthorRepository());
         }
 
         [Given("un auteur")]
@@ -46,7 +46,7 @@ namespace Bibly.ValidationTest.StepDefinitions
         {
             command = new AddAuthorCommand(FirstName, LastName, BirthDay);
 
-            await handler.Handle(command, CancellationToken.None);
+            await SendAsync(command);
         }
 
         [Then("l auteur est ajoute")]
@@ -57,5 +57,30 @@ namespace Bibly.ValidationTest.StepDefinitions
             FakeAuthorRepository.Authors.First().Value.LastName.Should().Be(LastName);
             FakeAuthorRepository.Authors.First().Value.BirthDay.Should().Be(BirthDay);
         }
+
+        [When("j ajoute l auteur {int} fois")]
+        public async Task WhenJAjouteLAuteurFois(int p0)
+        {
+            command = new AddAuthorCommand(FirstName, LastName, BirthDay);
+
+            try
+            {
+                await SendAsync(command);
+                await SendAsync(command);
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+        }
+
+        [Then("une erreur de validation est retournee")]
+        public void ThenUneErreurDeValidationEstRetournee()
+        {
+            exception.Should().NotBeNull();
+            exception.Should().BeOfType<ValidationException>();
+        }
+
     }
 }

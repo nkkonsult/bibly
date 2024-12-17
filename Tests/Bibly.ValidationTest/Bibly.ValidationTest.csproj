@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Bibly.Application\Bibly.Application.csproj" />
+    <ProjectReference Include="..\..\Bibly.UI\Bibly.UI.csproj" />
   </ItemGroup>
 
 </Project>

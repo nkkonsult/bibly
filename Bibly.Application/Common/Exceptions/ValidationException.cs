@@ -5,6 +5,12 @@ public class ValidationException : Exception
 {
     public Dictionary<string, string[]> Errors { get; set; }
 
+    public ValidationException(string error)
+    : base(error)
+    {
+        Errors = new Dictionary<string, string[]>();
+    }
+
     public ValidationException()
     : base("One or more validation failures have occurred.")
     {
