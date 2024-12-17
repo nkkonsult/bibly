@@ -1,4 +1,6 @@
 ﻿
+using ValidationException = Bibly.Application.Common.Exceptions.ValidationException;
+
 namespace Bibly.Application.Author;
 
 
@@ -6,9 +8,12 @@ public record AddAuthorCommand(string FirstName, string LastName, DateTime Birth
 
 public class AddAuthorCommandHandler(IAuthorRepository authorRepository) : IRequestHandler<AddAuthorCommand, int>
 {  
-    private AddAuthorCommandValidator validator;
     public async Task<int> Handle(AddAuthorCommand request, CancellationToken cancellationToken)
     {      
+        if(await authorRepository.Exist(request.FirstName,request.LastName, request.BirthDay))
+        {
+            throw new ValidationException("L'auteur existe déjà.");
+        }   
 
         return await authorRepository.Add(new AuthorDto(0,request.FirstName, request.LastName, request.BirthDay));
     }

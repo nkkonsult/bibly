@@ -13,7 +13,7 @@ public class SqlLiteAuthorRepository(BiblyDbContext context, IMapper mapper) : I
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> Equals(string firstName, string lastName, DateTime birthDay)
+    public async Task<bool> Exist(string firstName, string lastName, DateTime birthDay)
     {
         return await _context.Authors.AnyAsync(x => x.FirstName == firstName && x.LastName == lastName && x.BirthDay == birthDay);
     }

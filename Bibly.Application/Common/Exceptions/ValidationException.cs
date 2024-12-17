@@ -6,6 +6,8 @@ namespace Bibly.Application.Common.Exceptions
     {
         public Dictionary<string, string[]> Errors { get; set; }
 
+        public ValidationException(string msg) : base(msg) { }
+
         public ValidationException()
         : base("One or more validation failures have occurred.")
         {
