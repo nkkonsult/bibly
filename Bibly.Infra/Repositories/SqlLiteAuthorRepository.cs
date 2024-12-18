@@ -18,9 +18,9 @@ public class SqlLiteAuthorRepository(BiblyDbContext context, IMapper mapper) : I
         return await _context.Authors.AnyAsync(x => x.FirstName == firstName && x.LastName == lastName && x.BirthDay == birthDay);
     }
 
-    public Task<bool> ExistById(int id)
+    public async Task<bool> ExistById(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Authors.AllAsync(a => a.Id == id);
     }
 
     public async Task<IEnumerable<AuthorDto>> GetAllAsync(string search)

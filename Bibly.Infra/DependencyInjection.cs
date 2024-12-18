@@ -15,6 +15,7 @@ public static class DependencyInjection
         opt.UseSqlite(configuration.GetSection("Sqlite").Value));
 
         services.AddScoped<IAuthorRepository, SqlLiteAuthorRepository>();
+        services.AddScoped<IBookRepository, SqlLiteBookRepository>();
 
         return services;
     }

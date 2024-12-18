@@ -1,5 +1,5 @@
-using Bibly.Application.Author;
 using Bibly.Application.Books;
+using Bibly.Core.Dtos;
 using Bibly.ValidationTest.Drivers;
 
 namespace Bibly.ValidationTest.StepDefinitions
@@ -10,18 +10,13 @@ namespace Bibly.ValidationTest.StepDefinitions
     {
         private AddBookCommandBuilder? _addBookCommandBuilder;
         private AddBookCommand? _addBookCommand;
+        private List<BookDto> _books;
 
         [Given("un livre")]
         public void GivenUnLivre()
         {
             _addBookCommandBuilder = new();
 
-        }
-
-        [Given("son titre est {string}")]
-        public void GivenSonTitreEst(string title)
-        {
-            _addBookCommandBuilder.WithTitle(title);
         }
 
         [Given("l id de son auteur est {int}")]
@@ -64,35 +59,53 @@ namespace Bibly.ValidationTest.StepDefinitions
             item.PublicationDate.Should().Be(_addBookCommand.PublicationDate);
         }
 
-        [When("j ajoute le livre {int} fois")]
-        public void WhenJAjouteLeLivreFois(int p0)
+        [When("j ajoute le livre 2 fois")]
+        public async Task WhenJAjouteLeLivre2Fois()
         {
-            throw new PendingStepException();
+            try
+            {
+                _addBookCommand = _addBookCommandBuilder.Build();
+
+                FakeAuthorRepository repository = new FakeAuthorRepository();
+                await repository.ExistById(_addBookCommand.AuthorId);
+
+                await SendAsync(_addBookCommand);
+                await SendAsync(_addBookCommand);
+            }
+            catch (Application.Common.Exceptions.NotFoundException ex)
+            {
+                CommonStepDefinition.Exception = ex;
+            }
+
         }
 
-        [Given("sa date de publication est ulterieure a la date actuelle")]
-        public void GivenSaDateDePublicationEstUlterieureALaDateActuelle()
-        {
-            throw new PendingStepException();
-        }
 
         [Given("une liste de livre")]
         public void GivenUneListeDeLivre(DataTable dataTable)
         {
-            var books = dataTable.CreateSet<Book>().ToList();
+            _books = dataTable.CreateSet<BookDto>().ToList();
         }
 
 
         [When("j ajoute la liste de livre")]
-        public void WhenJAjouteLaListeDeLivre()
+        public async Task WhenJAjouteLaListeDeLivre()
         {
-            throw new PendingStepException();
+            try
+            {
+                await SendAsync(new AddBookListCommand(_books));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [Then("la liste de livre est ajoute")]
         public void ThenLaListeDeLivreEstAjoute()
         {
-            throw new PendingStepException();
+            FakeBookRepository.Books.Should().NotBeEmpty();
+            FakeBookRepository.Books.Count.Should().Be(_books.Count);
         }
 
         [Then("une erreur de auteur non trouvé est retournee")]
@@ -102,19 +115,23 @@ namespace Bibly.ValidationTest.StepDefinitions
         }
 
 
+        [Given("la date de publication est ulterieure a la date actuelle")]
+        public void GivenLaDateDePublicationEstUlterieureALaDateActuelle()
+        {
+            _addBookCommandBuilder.WithPublicationDate(DateTime.Now.AddDays(1));
+        }
+
+        [Given("son titre est (.*)")]
+        public void GivenSonTitreEstLeSeigneurDesAnneaux(string title)
+        {
+            _addBookCommandBuilder.WithTitle(title);
+        }
+
         public void Dispose()
         {
             FakeAuthorRepository.Authors.Clear();
             FakeBookRepository.Books.Clear();
         }
-    }
-
-    public class Book
-    {
-        public string Title { get; set; }
-        public int AuthorId { get; set; }
-        public DateTime PublicationDate { get; set; }
-
     }
 
     public class AddBookCommandBuilder

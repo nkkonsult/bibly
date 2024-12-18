@@ -10,9 +10,12 @@ public class AddBookCommandHandler(IBookRepository bookRepository, IAuthorReposi
 
     public async Task<int> Handle(AddBookCommand request, CancellationToken cancellationToken)
     {
-        if (await authorRepository.ExistById(request.AuthorId))
+        if (!await authorRepository.ExistById(request.AuthorId))
             throw new NotFoundException("Author", request.AuthorId);
-  
+
+        if(await bookRepository.Exist(request.Title, request.AuthorId, request.PublicationDate))
+            throw new Common.Exceptions.ValidationException("Ce livre existe déjà dans la bibliothèque");
+
         return await bookRepository.Add(new BookDto(request.Title, request.AuthorId, request.PublicationDate));
     }
 }
@@ -21,7 +24,9 @@ public class AddBookCommandValidator : AbstractValidator<AddBookCommand>
 {
     public AddBookCommandValidator()
     {
-        
+        RuleFor(b=> b.PublicationDate)
+            .LessThan(DateTime.Now)
+            .WithMessage("La date de publication doit être inférieure à la date actuelle");
     }
 }
 
