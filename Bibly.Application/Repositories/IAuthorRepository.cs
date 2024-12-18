@@ -4,6 +4,7 @@
     {
         Task<int> Add(AuthorDto author);
         Task<bool> Exist(string firstName, string lastName, DateTime birthDay);
+        Task<bool> Exist(int authorID);
         Task<IEnumerable<AuthorDto>> GetAllAsync(string search);
     }
 }

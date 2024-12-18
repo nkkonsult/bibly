@@ -27,7 +27,7 @@ Scenario: Add a book with a future publication date
 	Given un livre
 	And son titre est "Le Seigneur des Anneaux"
 	And l id de son auteur est 15
-	And sa date de publication est ulterieure a la date actuelle
+	And que sa date de publication est ulterieure a la date actuelle
 	When j ajoute le livre
 	Then une errreur de validation est retournee
 

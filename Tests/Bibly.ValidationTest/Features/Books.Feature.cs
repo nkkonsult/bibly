@@ -238,7 +238,7 @@ await this.FeatureBackgroundAsync();
  await testRunner.AndAsync("l id de son auteur est 15", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 30
- await testRunner.AndAsync("sa date de publication est ulterieure a la date actuelle", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("que sa date de publication est ulterieure a la date actuelle", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 31
  await testRunner.WhenAsync("j ajoute le livre", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");

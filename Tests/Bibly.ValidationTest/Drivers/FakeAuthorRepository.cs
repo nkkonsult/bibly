@@ -19,6 +19,12 @@ internal class FakeAuthorRepository : IAuthorRepository
         return Authors.Values.Any(a => a.FirstName == firstName && a.LastName == lastName && a.BirthDay == birthDay);
     }
 
+    public async Task<bool> Exist(int authorID)
+    {
+        await Task.Yield();
+        return Authors.TryGetValue(authorID, out var author);
+    }
+
     public Task<IEnumerable<AuthorDto>> GetAllAsync(string search)
     {
         throw new NotImplementedException();

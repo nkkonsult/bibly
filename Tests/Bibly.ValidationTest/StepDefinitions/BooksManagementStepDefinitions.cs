@@ -14,7 +14,6 @@ namespace Bibly.ValidationTest.StepDefinitions
         public void GivenUnLivre()
         {
             _addBookCommandBuilder = new();
-
         }
 
         [Given("son titre est {string}")]
@@ -59,17 +58,18 @@ namespace Bibly.ValidationTest.StepDefinitions
             throw new PendingStepException();
         }
 
-        [Given("sa date de publication est ulterieure a la date actuelle")]
-        public void GivenSaDateDePublicationEstUlterieureALaDateActuelle()
-        {
-            throw new PendingStepException();
-        }
-
         [Given("une liste de livre")]
         public void GivenUneListeDeLivre(DataTable dataTable)
         {
             var books = dataTable.CreateSet<Book>().ToList();
         }
+
+        [Given("que sa date de publication est ulterieure a la date actuelle")]
+        public void GivenQueSaDateDePublicationEstUlterieureALaDateActuelle()
+        {
+            throw new PendingStepException();
+        }
+
 
 
         [When("j ajoute la liste de livre")]
