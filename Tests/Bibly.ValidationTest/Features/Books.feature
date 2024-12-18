@@ -1,5 +1,12 @@
 ﻿Feature: Books management
 
+Background:
+	Given une liste d'auteurs
+	| Id | First Name | Last Name | Birth Date |
+	| 15 | J.R.R. | Tolkien | 1892-01-03 |
+	| 16 | George | R.R. Martin | 1948-09-20 |
+	| 17 | J.K. | Rowling | 1965-07-31 |
+
 Scenario: Add a book
 	Given un livre
 	And son titre est "Le Seigneur des Anneaux"
@@ -26,7 +33,7 @@ Scenario: Add a book with a future publication date
 
 Scenario: Add a list of books
 	Given une liste de livre
-	| Titre | Auteur | Date de publication |
+	| Title | Author | Publication date |
 	| Le Seigneur des Anneaux | 15 | 1954-07-29 |
 	| Le Hobbit | 15 | 1937-09-21 |
 	When j ajoute la liste de livre

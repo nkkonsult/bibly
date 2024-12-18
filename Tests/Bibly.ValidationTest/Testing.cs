@@ -13,6 +13,7 @@ public class Testing
     {
         var services = new ServiceCollection();
         services.AddScoped<IAuthorRepository, FakeAuthorRepository>();
+        services.AddScoped<IBookRepository, FakeBookRepository>();
         services.AddApplication();
         _scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
     }

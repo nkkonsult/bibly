@@ -1,10 +1,11 @@
 using Bibly.Application.Author.Command;
+using Bibly.Core.Dtos;
 using Bibly.ValidationTest.Drivers;
 
 namespace Bibly.ValidationTest.StepDefinitions
 {
     [Binding]
-    public class GestionDesAuteursStepDefinitions : CommonStepDefinition, IDisposable
+    public class GestionDesAuteursStepDefinitions : Testing, IDisposable
     {
         private AddAuthorCommand command;
         private string LastName;
@@ -67,9 +68,18 @@ namespace Bibly.ValidationTest.StepDefinitions
             }
             catch (Exception ex)
             {
-                exception = ex;
+                CommonStepDefinition.exception = ex;
             }
+        }
 
+        [Given("une liste d'auteurs")]
+        public void GivenUneListeDauteurs(DataTable dataTable)
+        {
+            var authors = dataTable.CreateSet<AuthorDto>();
+            foreach (var author in authors)
+            {
+                FakeAuthorRepository.Authors.Add(author.Id, author);
+            }
         }
 
         public void Dispose() => FakeAuthorRepository.Authors.Clear();
