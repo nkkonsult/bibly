@@ -5,7 +5,7 @@ using Bibly.ValidationTest.Drivers;
 namespace Bibly.ValidationTest.StepDefinitions
 {
     [Binding]
-    public class GestionDesAuteursStepDefinitions : Testing
+    public class GestionDesAuteursStepDefinitions : Testing, IDisposable
     {
         private AddAuthorCommand command;
         private string LastName;
@@ -82,5 +82,6 @@ namespace Bibly.ValidationTest.StepDefinitions
             exception.Should().BeOfType<ValidationException>();
         }
 
+        public void Dispose() => FakeAuthorRepository.Authors.Clear();
     }
 }
