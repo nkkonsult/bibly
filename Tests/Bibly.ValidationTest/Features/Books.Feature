@@ -20,7 +20,7 @@ Scenario: Add a book without author exist
 	And son titre est "Le Seigneur des Anneaux"
 	And l id de son auteur est 30
 	When j ajoute le livre 
-	Then une erreur de auteur non trouvé est retournee
+	Then une exception NotFound est retournee
 
 Scenario: Add the same book twice
 	Given un livre

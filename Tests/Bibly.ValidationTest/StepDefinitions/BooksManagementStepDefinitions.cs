@@ -48,8 +48,9 @@ namespace Bibly.ValidationTest.StepDefinitions
 
                 await SendAsync(_addBookCommand);
             }
-            catch (Bibly.Application.Common.Exceptions.NotFoundException ex)
+            catch (Application.Common.Exceptions.NotFoundException ex)
             {
+                CommonStepDefinition.Exception = ex;
             }
         }
 

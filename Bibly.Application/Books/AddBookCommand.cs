@@ -11,7 +11,7 @@ public class AddBookCommandHandler(IBookRepository bookRepository, IAuthorReposi
     public async Task<int> Handle(AddBookCommand request, CancellationToken cancellationToken)
     {
         if (await authorRepository.ExistById(request.AuthorId))
-            throw new NotFoundException("L'auteur n'existe pas", "");
+            throw new NotFoundException("Author", request.AuthorId);
   
         return await bookRepository.Add(new BookDto(request.Title, request.AuthorId, request.PublicationDate));
     }

@@ -198,7 +198,10 @@ await this.FeatureBackgroundAsync();
  await testRunner.WhenAsync("j ajoute le livre", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 23
- await testRunner.ThenAsync("une erreur de auteur non trouv� est retournee", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("une exception NotFound est retournee", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 24
+ await testRunner.AndAsync("Le message d erreur est \"L\'auteur n\'existe pas\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "* ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -212,7 +215,7 @@ await this.FeatureBackgroundAsync();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Add the same book twice", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 25
+#line 26
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -225,22 +228,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 26
+#line 27
  await testRunner.GivenAsync("un livre", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 27
+#line 28
  await testRunner.AndAsync("son titre est \"Le Seigneur des Anneaux\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 28
+#line 29
  await testRunner.AndAsync("l id de son auteur est 15", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 29
+#line 30
  await testRunner.AndAsync("sa date de publication est 1954-07-29", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 30
+#line 31
  await testRunner.WhenAsync("j ajoute le livre 2 fois", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 31
+#line 32
  await testRunner.ThenAsync("une errreur de validation est retournee", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -255,7 +258,7 @@ await this.FeatureBackgroundAsync();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Add a book with a future publication date", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
+#line 34
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -268,22 +271,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 34
+#line 35
  await testRunner.GivenAsync("un livre", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 35
+#line 36
  await testRunner.AndAsync("son titre est \"Le Seigneur des Anneaux\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 36
+#line 37
  await testRunner.AndAsync("l id de son auteur est 15", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 37
+#line 38
  await testRunner.AndAsync("sa date de publication est ulterieure a la date actuelle", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 38
+#line 39
  await testRunner.WhenAsync("j ajoute le livre", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 39
+#line 40
  await testRunner.ThenAsync("une errreur de validation est retournee", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -298,7 +301,7 @@ await this.FeatureBackgroundAsync();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Add a list of books", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 41
+#line 42
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -323,13 +326,13 @@ await this.FeatureBackgroundAsync();
                             "Le Hobbit",
                             "15",
                             "1937-09-21"});
-#line 42
+#line 43
  await testRunner.GivenAsync("une liste de livre", ((string)(null)), table2, "Given ");
 #line hidden
-#line 46
+#line 47
  await testRunner.WhenAsync("j ajoute la liste de livre", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 47
+#line 48
  await testRunner.ThenAsync("la liste de livre est ajoute", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
