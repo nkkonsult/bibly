@@ -1,24 +1,21 @@
 using Bibly.Application.Author;
-using Bibly.Application.Common.Exceptions;
 using Bibly.Core.Dtos;
 using Bibly.ValidationTest.Drivers;
 
 namespace Bibly.ValidationTest.StepDefinitions
 {
     [Binding]
-    public class GestionDesAuteursStepDefinitions : Testing
+    public class GestionDesAuteursStepDefinitions : Testing, IDisposable
     {
         private AddAuthorCommand command;
         private string LastName;
         private string FirstName;
         private DateTime BirthDay;
 
-        private Exception exception;    
 
-       
         [Given("un auteur")]
         public void GivenUnAuteur()
-        {            
+        {
         }
 
         [Given("son nom est {string}")]
@@ -39,11 +36,11 @@ namespace Bibly.ValidationTest.StepDefinitions
             BirthDay = date;
         }
 
-  
+
 
         [When("j ajoute lauteur")]
-        public async  Task WhenJAjouteLauteur()
-        {            
+        public async Task WhenJAjouteLauteur()
+        {
             command = new AddAuthorCommand(FirstName, LastName, BirthDay);
 
             await SendAsync(command);
@@ -72,15 +69,23 @@ namespace Bibly.ValidationTest.StepDefinitions
             catch (Exception ex)
             {
 
-                exception = ex;
+                CommonStepDefinition.Exception = ex;
             }
         }
 
-        [Then("une errreur de validation est retournee")]
-        public void ThenUneErrreurDeValidationEstRetournee()
+        [Given("une liste d'auteurs")]
+        public void GivenUneListeDauteurs(DataTable dataTable)
         {
-            exception.Should().NotBeNull();
-            exception.Should().BeOfType<ValidationException>();
+            var authors = dataTable.CreateSet<AuthorDto>();
+            foreach (var item in authors)
+            {
+                FakeAuthorRepository.Authors.Add(item.Id, item);
+            }
+        }
+
+        public void Dispose()
+        {
+            FakeAuthorRepository.Authors.Clear();
         }
     }
 }
