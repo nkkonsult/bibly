@@ -12,9 +12,10 @@ public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, IEn
     }
     public async Task<IEnumerable<AuthorDto>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
     {
+
         var authors = await _authorRepository.GetAllAsync(request.Search);
 
-        throw new Exception("ça marche pas");
+        //throw new Exception("ça marche pas");
         return authors;
     }
 }

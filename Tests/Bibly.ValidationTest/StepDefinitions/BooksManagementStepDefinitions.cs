@@ -1,3 +1,4 @@
+using Bibly.Application.Author;
 using Bibly.Application.Books;
 using Bibly.ValidationTest.Drivers;
 
@@ -38,9 +39,18 @@ namespace Bibly.ValidationTest.StepDefinitions
         [When("j ajoute le livre")]
         public async Task WhenJAjouteLeLivre()
         {
-            _addBookCommand = _addBookCommandBuilder.Build();
+            try
+            {
+                _addBookCommand = _addBookCommandBuilder.Build();
 
-            await SendAsync(_addBookCommand);
+                FakeAuthorRepository repository = new FakeAuthorRepository();
+                await repository.ExistById(_addBookCommand.AuthorId);
+
+                await SendAsync(_addBookCommand);
+            }
+            catch (Bibly.Application.Common.Exceptions.NotFoundException ex)
+            {
+            }
         }
 
         [Then("le livre est ajoute")]
@@ -84,8 +94,16 @@ namespace Bibly.ValidationTest.StepDefinitions
             throw new PendingStepException();
         }
 
+        [Then("une erreur de auteur non trouvé est retournee")]
+        public void ThenUneErreurDeAuteurNonTrouveEstRetournee()
+        {
+            throw new PendingStepException();
+        }
+
+
         public void Dispose()
         {
+            FakeAuthorRepository.Authors.Clear();
             FakeBookRepository.Books.Clear();
         }
     }

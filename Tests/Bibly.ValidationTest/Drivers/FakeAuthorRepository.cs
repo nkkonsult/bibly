@@ -6,6 +6,7 @@ namespace Bibly.ValidationTest.Drivers;
 internal class FakeAuthorRepository : IAuthorRepository
 {
     public static Dictionary<int,AuthorDto> Authors = [];
+
     public async Task<int> Add(AuthorDto author)
     {
         await Task.Yield();
@@ -20,7 +21,13 @@ internal class FakeAuthorRepository : IAuthorRepository
     }
 
     public Task<IEnumerable<AuthorDto>> GetAllAsync(string search)
-    {
+    {    
         throw new NotImplementedException();
+    }
+
+    public async Task<bool> ExistById(int id)
+    {
+        await Task.Yield();
+        return !Authors.ContainsKey(id);
     }
 }

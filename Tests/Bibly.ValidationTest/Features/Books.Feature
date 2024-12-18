@@ -15,6 +15,13 @@ Scenario: Add a book
 	When j ajoute le livre
 	Then le livre est ajoute
 
+Scenario: Add a book without author exist
+	Given un livre
+	And son titre est "Le Seigneur des Anneaux"
+	And l id de son auteur est 30
+	When j ajoute le livre 
+	Then une erreur de auteur non trouvé est retournee
+
 Scenario: Add the same book twice
 	Given un livre
 	And son titre est "Le Seigneur des Anneaux"
